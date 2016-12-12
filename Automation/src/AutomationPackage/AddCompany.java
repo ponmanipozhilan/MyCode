@@ -34,7 +34,7 @@ public class AddCompany {
 
 		
 		
-		System.out.println("Add Company Process Finished successfully 1");
+		System.out.println("Add Company Process Finished successfully 2");
 		
 	}
 
