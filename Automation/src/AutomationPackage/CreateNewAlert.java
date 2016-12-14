@@ -1,16 +1,12 @@
 package AutomationPackage;
-import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
-@SuppressWarnings("deprecation")
 public class CreateNewAlert {
 
 	
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws InterruptedException {
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver_win32\\chromedriver.exe");
