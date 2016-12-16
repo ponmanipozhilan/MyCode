@@ -9,6 +9,7 @@ public class AddCompany {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
+		String emailId = "JSmith1@atqa.lcbsconnect.com";
 		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver_win32\\chromedriver.exe");
 		
 		WebDriver driver=new ChromeDriver();
@@ -17,7 +18,7 @@ public class AddCompany {
 		
 		driver.get("https://atqa.testqa-lcbs.honeywell.com");
 		
-		driver.findElement(By.id("cred_userid_inputtext")).sendKeys("JSmith1@atqa.lcbsconnect.com");
+		driver.findElement(By.id("cred_userid_inputtext")).sendKeys(emailId);
 		Thread.sleep(2000);
 		driver.findElement(By.id("cred_password_inputtext")).sendKeys("lcbs@123");
 		Thread.sleep(2000);
@@ -32,7 +33,7 @@ public class AddCompany {
 		driver.findElement(By.xpath(".//*[@id='alert-config-nav']/a[3]")).click();
 		Thread.sleep(5000);
 
-		
+		AccessingEmailLink.accessEmail();
 		
 		System.out.println("Add Company Process Finished successfully 5");
 		

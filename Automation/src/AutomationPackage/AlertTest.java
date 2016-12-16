@@ -48,7 +48,7 @@ public class AlertTest {
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[2]/div/ul/li/a[contains(text(), 'Digital')]")).click();
 
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[3]/input")).sendKeys("Test");
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[3]/input")).sendKeys("creating");
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[4]/div/a")).click();
 		Thread.sleep(3000);
@@ -73,12 +73,15 @@ public class AlertTest {
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/section/button")).click();
 		
-		Thread.sleep(30000);
-		String AA = driver.findElement(By.xpath("//*[@id='alert-settings-list']/ul/li/div/div/article/dl[1]/dt/a[contains(text(), 'ponmani0')]")).getText();
+		Thread.sleep(40000);
+		String AA = driver.findElement(By.xpath("//*[@id='alert-settings-list']/ul/li/div/div/article/dl[1]/dt/a[contains(text(), 'creating')]")).getText();
 		
-		Assert.assertEquals("ponmani0", AA);
+		Assert.assertEquals("creating", AA);
 		
+		System.out.println("Created alert configuration successfully");
+		}
+	
 		
-	}
+	
 
 }
