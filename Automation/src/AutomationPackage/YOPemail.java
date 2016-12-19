@@ -3,15 +3,17 @@ package AutomationPackage;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class AccessingEmailLink {
+public class YOPemail {
 
-	@Test(dataProviderClass = TestData.class, dataProvider = "mailinatorData")
+	@Test(dataProviderClass = TestData.class, dataProvider = "YOPdata")
 	public static void accessEmail(String emailid, String phno, String firstname,
 			String lastname) throws InterruptedException {
 		
@@ -22,37 +24,46 @@ public class AccessingEmailLink {
 
 		driver.manage().window().maximize();
 
-		driver.get("https://www.mailinator.com/");
+		driver.get("http://www.yopmail.com/");
 		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.id("inboxfield")));
-
-		driver.findElement(By.id("inboxfield")).sendKeys(emailid);
-
-		driver.findElement(
-				By.xpath("html/body/section[1]/div/div[3]/div[2]/div[2]/div[1]/span/button"))
-				.click();
-		WebDriverWait wait1 = new WebDriverWait(driver, 5);
-		wait1.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath("//*[@id='public_maildirdiv']/div/div/div/div[5]/div[contains(text(), 'You have been authorized to use the new temperature control system in your building')]")));
-
+				.id("login")));
+		
+		WebElement webElement = driver.findElement(By.id("login"));
+		
+		driver.findElement(By.id("login")).clear();
+		driver.findElement(By.id("login")).sendKeys(emailid);
+		
+		Thread.sleep(5000);
+		
+		webElement.sendKeys(Keys.TAB);
+		webElement.sendKeys(Keys.ENTER);
+		
+		Thread.sleep(10000);
+		
 		String handle = driver.getWindowHandle();
 
-		// driver.findElement(By.xpath("//*[@id='row_public_1481895406-100040578409-sit6']/div[2]/div[5]/div")).click();
-
-		driver.findElement(
-				By.xpath("//*[@id='public_maildirdiv']/div/div/div/div[5]/div[contains(text(), 'You have been authorized to use the new temperature control system in your building')]"))
-				.click();
+		driver.switchTo().frame("ifinbox");
+		
+		System.out.println("Switched to Inbox");
+		
+		Thread.sleep(5000);
+		
+		driver.findElement(By.xpath("//span[contains(text(),'You have been authorized to use the new temperature control system in your building')]")).click();
 
 		Thread.sleep(5000);
-
-		driver.switchTo().frame("publicshowmaildivcontent");
-
-		driver.findElement(
-				By.xpath("html/body/table/tbody/tr[3]/td/table/tbody/tr[3]/td/table/tbody/tr/td/a[1]/span[contains(text(), 'GET STARTED')]"))
-				.click();
+		
+		driver.switchTo().defaultContent();
 
 		Thread.sleep(2000);
+		
+		driver.switchTo().frame("ifmail");
+		
+		System.out.println("Switched to Email body");
+
+		driver.findElement(By.xpath("//span[contains(text(),'GET STARTED')]")).click();
+		
+		Thread.sleep(5000);
 
 		Set<String> handle1 = driver.getWindowHandles();
 
@@ -64,13 +75,11 @@ public class AccessingEmailLink {
 
 				System.out.println("Switched to Child window successfully");
 
-				// driver.findElement(By.xpath("//*[@id='eula-wrapper']/div[2]/label")).click();
-				// driver.findElement(By.xpath("//*[@id='eula-wrapper']/div[3]/button")).click();
-				Thread.sleep(60000);
+				driver.findElement(By.xpath("//*[@id='eula-wrapper']/div[2]/label")).click();
+				driver.findElement(By.xpath("//*[@id='eula-wrapper']/div[3]/button")).click();
+				Thread.sleep(8000);
 
 				System.out.println("Accepted the invite");
-
-				Thread.sleep(5000);
 
 				driver.switchTo().window(handle);
 				System.out.println("Switched to Parent window successfully");
@@ -79,26 +88,28 @@ public class AccessingEmailLink {
 
 		Thread.sleep(5000);
 
-		driver.findElement(
-				By.xpath("//*[@id='publicInboxCtrl']/div[1]/div[3]/div/div/button"))
-				.click();
-		WebDriverWait wait2 = new WebDriverWait(driver, 5);
-		wait2.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath("//*[@id='public_maildirdiv']/div/div[1]/div/div[5]/div[contains(text(), 'LCBS Connect Verification Code')]")));
-
-		// driver.findElement(By.xpath("//*[@id='row_public_1481895551-3000179684447-sit6']/div[2]/div[5]/div")).click();
-
-		driver.findElement(
-				By.xpath("//*[@id='public_maildirdiv']/div/div[1]/div/div[5]/div[contains(text(), 'LCBS Connect Verification Code')]"))
-				.click();
+		driver.findElement(By.xpath("//*[@id='lrefr']/span/span")).click();
+		
+		Thread.sleep(8000);
+		
+		driver.switchTo().frame("ifinbox");
+		System.out.println("Switched to Inbox");
+		
+		Thread.sleep(3000);
+		
+		driver.findElement(By.xpath("//span[contains(text(),'LCBS Connect Verification Code')]")).click();
+		
+		driver.switchTo().defaultContent();
 
 		Thread.sleep(5000);
 
-		driver.switchTo().frame("publicshowmaildivcontent");
+		driver.switchTo().frame("ifmail");
+		
+		System.out.println("Switched to Email body");
 
 		String passcode = driver
 				.findElement(
-						By.xpath("html/body/table/tbody/tr[3]/td/table/tbody/tr[1]/td/b"))
+						By.xpath("//*[@id='mailmillieu']/div[2]/table/tbody/tr[3]/td/table/tbody/tr[1]/td/b"))
 				.getText();
 
 		System.out.println(passcode);
