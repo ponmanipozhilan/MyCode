@@ -2,66 +2,99 @@ package AutomationPackage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 
 public class CreateNewAlert {
-
 	
-	public static void main(String[] args) throws InterruptedException {
+	//public WebDriver driver;
+	//private String alertName;
+
+	@Test(dataProviderClass = TestDataAlert.class, dataProvider = "logindataAlert")
+	public void CreateAlertTesting(String url, String username, String password, String BuildingName, String RTUname, String AlertType, String CreateAlert, String Priority, String PointName, String limit, String editalert) throws InterruptedException {
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver_win32\\chromedriver.exe");
 		
-		WebDriver driver=new ChromeDriver();
+		WebDriver driver = new ChromeDriver();
 		
 		driver.manage().window().maximize();
 		
-		driver.get("https://datdev.test-lcbs.honeywell.com");
+		driver.get(url);
 		
-		driver.findElement(By.id("cred_userid_inputtext")).sendKeys("dcontractor37@datdev.lcbsconnect.com");
+		driver.findElement(By.id("cred_userid_inputtext")).sendKeys(username);
 		Thread.sleep(2000);
-		driver.findElement(By.id("cred_password_inputtext")).sendKeys("lcbs@1234");
+		driver.findElement(By.id("cred_password_inputtext")).sendKeys(password);
 		Thread.sleep(2000);
 		driver.findElement(By.id("cred_sign_in_button")).click();
-		Thread.sleep(15000);
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='main-nav']/ul/li[2]/a")));
+
 		driver.findElement(By.xpath("//*[@id='main-nav']/ul/li[2]/a")).click();
-		Thread.sleep(10000);
+		
+		WebDriverWait wait1 = new WebDriverWait(driver, 20);
+		wait1.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='main-content']/ul/li/div[1]/a/article/span[contains(text(), '"
+						+ BuildingName + "')]")));
 
-		driver.findElement(By.xpath("//*[@id='main-content']/ul/li/div[1]/a/article/span[contains(text(), 'Intermountain Healthcare 6397')]")).click();
-		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='main-content']/ul/li/div[1]/a/article/span[contains(text(), '"
+						+ BuildingName + "')]")).click();
 
-		driver.findElement(By.xpath(".//*[@id='alert-config-nav']/a[3]")).click();
+		WebDriverWait wait2 = new WebDriverWait(driver, 3);
+		wait2.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='alert-config-nav']/a[3]")));
+
+		driver.findElement(By.xpath("//*[@id='alert-config-nav']/a[3]")).click();
 		Thread.sleep(5000);
 
-		int i;
+		//int i;
 		
-		for(i=4; i<=10; i++){
+		//for(i=19; i<=19; i++){
 		
 		driver.findElement(By.xpath("//*[@id='alert-settings-sort']/a")).click();
-		Thread.sleep(10000);
+		WebDriverWait wait3 = new WebDriverWait(driver, 15);
+		wait3.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='add-alert-container']/section/div[1]/div/a")));
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[1]/div/a")).click();
-		Thread.sleep(3000);
+		WebDriverWait wait4 = new WebDriverWait(driver, 10);
+		wait4.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='add-alert-container']/section/div[1]/div/ul/li/a[contains(text(), '"
+						+ RTUname + "')]")));
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[1]/div/ul/li/a[contains(text(), 'R_1')]")).click();
-
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[1]/div/ul/li/a[contains(text(), '"
+						+ RTUname + "')]")).click();
+        Thread.sleep(5000);
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[2]/div/a")).click();
-		Thread.sleep(5000);
+		WebDriverWait wait5 = new WebDriverWait(driver, 5);
+		wait5.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='add-alert-container']/section/div[2]/div/ul/li/a[contains(text(), '"
+						+ AlertType + "')]")));
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[2]/div/ul/li/a[contains(text(), 'Digital')]")).click();
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[2]/div/ul/li/a[contains(text(), '"
+						+ AlertType + "')]")).click();
 
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[3]/input")).sendKeys("Test" + i);
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[3]/input")).sendKeys(CreateAlert);
 
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[4]/div/a")).click();
 		Thread.sleep(3000);
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[4]/div/ul/li/a[contains(text(), 'High')]")).click();
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[4]/div/ul/li/a[contains(text(), '"
+						+ Priority + "')]")).click();
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[5]/div/a")).click();
-		Thread.sleep(2000);
+		WebDriverWait wait6 = new WebDriverWait(driver, 5);
+		wait6.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//*[@id='add-alert-container']/section/div[5]/div/ul/li/a[contains(text(), '"
+						+ PointName + "')]")));
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[5]/div/ul/li/a[contains(text(), 'Dirty Filter')]")).click();
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[5]/div/ul/li/a[contains(text(), '"
+						+ PointName + "')]")).click();
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[6]/input")).clear();
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[6]/input")).sendKeys("2");
@@ -69,20 +102,35 @@ public class CreateNewAlert {
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[7]/div/div")).click();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[7]/div/ul/li/a[contains(text(), '0-Normally Closed')]")).click();
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[7]/div/ul/li/a[contains(text(), '"
+						+ limit + "')]")).click();
+		//String Alert = "Test"+i;
 		
-		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[10]/textarea")).sendKeys("Test" + i);
+		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/div[10]/textarea")).sendKeys(CreateAlert);
 		Thread.sleep(2000);
 
 		driver.findElement(By.xpath("//*[@id='add-alert-container']/section/section/button")).click();
 		
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 			
-		}
+		String AlertName = driver.findElement(By.xpath("//*[@id='alert-settings-list']/ul/li/div/div/article/dl[1]/dt/a[contains(text(), '"
+						+ CreateAlert + "')]")).getText();
 		
+		System.out.println(AlertName);
 		
-		System.out.println("Finished successfully");
+		Assert.assertEquals(CreateAlert, AlertName);
+
+		System.out.println("Alert Configuration created successfully");
 		
+		driver.quit();		
+		//editalerttesting(Alert);
+		//alertName = Alert;
+		
+		//}
 	}
+	
+	
+
+	
 
 }

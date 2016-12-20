@@ -111,8 +111,7 @@ public class CreatingNewOccupant {
 
 		String OccupantName = driver
 				.findElement(
-						By.xpath("//*[@id='occupant-list-container']/table/tbody/tr/td[contains(@class, 'email ng-binding')][contains(text(), '"
-								+ emailid + "')]")).getText();
+						By.xpath("//*[@id='occupant-list-container']/table/tbody/tr/td[contains(@class, 'email ng-binding')][contains(text(), '"+ emailid + "')]")).getText();
 
 		System.out.println(OccupantName);
 
