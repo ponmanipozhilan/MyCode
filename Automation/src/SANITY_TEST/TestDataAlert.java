@@ -12,10 +12,10 @@ public class TestDataAlert {
 			Object[][] obj = new Object[1][11];
 			
 			
-			obj[0][0]="https://atqa.testqa-lcbs.honeywell.com";
-			obj[0][1]="JSmith1@atqa.lcbsconnect.com";
-         	obj[0][2]="lcbs@123";
-			obj[0][3]="Test";
+			obj[0][0]="https://datdev.testqa-lcbs.honeywell.com";
+			obj[0][1]="dcontractor37@datdev.lcbsconnect.com";
+         	obj[0][2]="lcbs@1234";
+			obj[0][3]="Building2";
 			obj[0][4]="RTU61";
 			obj[0][5]="Digital";	
 			obj[0][6]="Create Alert";

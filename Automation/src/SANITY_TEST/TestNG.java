@@ -46,7 +46,7 @@ public class TestNG {
 		            FindingAlert.FindAlert(a);
 			}
 
-		@Test(groups = { "smokeTest", "alerts","webapp","sanity" }, enabled =false, dataProviderClass = TestDataAlert.class, dataProvider = "logindataAlert")
+		@Test(groups = { "smokeTest", "alerts","webapp","sanity" }, enabled =true, dataProviderClass = TestDataAlert.class, dataProvider = "logindataAlert")
 		public void AlertCount(String url, String username, String password, String BuildingName, String RTUname, String AlertType, String CreateAlert, String Priority, String PointName, String limit, String editalert) throws InterruptedException
 				 {
 	
@@ -107,7 +107,7 @@ public class TestNG {
 			
 			}
 
-		@Test(groups = { "smokeTest", "alerts","webapp","sanity" }, enabled =true, dataProviderClass = TestDataAlert.class, dataProvider = "logindataAlert")
+		@Test(groups = { "smokeTest", "alerts","webapp","sanity" }, enabled =false, dataProviderClass = TestDataAlert.class, dataProvider = "logindataAlert")
 		public void EditAlert(String url, String username, String password, String BuildingName, String RTUname, String AlertType, String CreateAlert, String Priority, String PointName, String limit, String editalert) throws InterruptedException
 				 {
 	
