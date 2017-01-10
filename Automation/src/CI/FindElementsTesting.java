@@ -23,7 +23,7 @@ public class FindElementsTesting {
 		
 		driver.get(url);
 		
-		//Login
+		// Login
 		driver.findElement(By.id("cred_userid_inputtext")).sendKeys(username);
 		Thread.sleep(2000);
 		driver.findElement(By.id("cred_password_inputtext")).sendKeys(password);
